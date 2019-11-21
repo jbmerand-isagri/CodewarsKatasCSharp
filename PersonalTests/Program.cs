@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PersonalTests
+namespace KatasSolutions
 {
     internal class Program
     {

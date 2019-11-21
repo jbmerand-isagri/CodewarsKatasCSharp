@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace PersonalTests
+namespace KatasSolutions
 {
     public class Kata
     {
@@ -189,6 +189,85 @@ namespace PersonalTests
 
             return string.Concat(finalWords).Trim();
             // return string.Join(" ", str.Split(' ').Select(w => w.Substring(1) + w[0] + "ay"));
+        }
+
+        public static bool IsPrime(int n)
+        {
+            if (n < 0)
+            {
+                return false;
+            }
+
+            if (n == 0 || n == 1)
+            {
+                return false;
+            }
+
+            if ((n > 2 && n % 2 == 0) || (n > 3 && n % 3 == 0) || (n > 5 && n % 5 == 0) || (n > 7 && n % 7 == 0) || (n > 11 && n % 11 == 0))
+            {
+                return false;
+            }
+
+            for (int i = 3; i <= Math.Ceiling((Math.Sqrt(n))); i++)
+            {
+                if (n % i == 0 && i != n)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        public static bool comp(int[] a, int[] b) // TODO: finish it, https://www.codewars.com/kata/550498447451fbbd7600041c/train/csharp
+        {
+            if (a == null || b == null || a.Length == 0 || b.Length == 0)
+            {
+                return false;
+            }
+
+            var isAllNumbersOfAValid = true;
+
+            b.ToList()
+                .ForEach(n =>
+                {
+                    if (Math.Sqrt(n) != Math.Floor(Math.Sqrt(n)))
+                    {
+                        isAllNumbersOfAValid = false;
+                    }
+                });
+
+            if (!isAllNumbersOfAValid)
+            {
+                return false;
+            }
+
+            var squaredNumbersOfA = a
+                .ToList()
+                .Select(n => n * n)
+                .ToList();
+            var squareRootNumbersOfB = b
+                .ToList()
+                .Select(n => Math.Sqrt(n))
+                .ToList();
+
+            foreach (var sn in squaredNumbersOfA)
+            {
+                if (!b.Contains(sn))
+                {
+                    return false;
+                }
+            }
+
+            foreach (var srn in squareRootNumbersOfB)
+            {
+                if (!a.ToList().Contains(Convert.ToInt32(srn)))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }

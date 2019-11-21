@@ -1,7 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using PersonalTests;
+using KatasSolutions;
 
-namespace PersonalTestsTests
+namespace KatasSolutionsTests
 {
     [TestClass]
     public class KataTest
@@ -9,11 +9,11 @@ namespace PersonalTestsTests
         [TestMethod]
         public void CountBits()
         {
-            Assert.AreEqual(0, PersonalTests.Kata.CountBits(0));
-            Assert.AreEqual(1, PersonalTests.Kata.CountBits(4));
-            Assert.AreEqual(3, PersonalTests.Kata.CountBits(7));
-            Assert.AreEqual(2, PersonalTests.Kata.CountBits(9));
-            Assert.AreEqual(2, PersonalTests.Kata.CountBits(10));
+            Assert.AreEqual(0, KatasSolutions.Kata.CountBits(0));
+            Assert.AreEqual(1, KatasSolutions.Kata.CountBits(4));
+            Assert.AreEqual(3, KatasSolutions.Kata.CountBits(7));
+            Assert.AreEqual(2, KatasSolutions.Kata.CountBits(9));
+            Assert.AreEqual(2, KatasSolutions.Kata.CountBits(10));
         }
     }
 }
