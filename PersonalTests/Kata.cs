@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace KatasSolutions
 {
@@ -268,6 +269,87 @@ namespace KatasSolutions
             }
 
             return true;
+        }
+
+        public static string LongestConsec(string[] strarr, int k)
+        {
+            if (strarr.Length == 0 || k > strarr.Length || k <= 0)
+            {
+                return ""; // return string.Empty;
+            }
+            else
+            {
+                var longestConsecutiveStrings = "";
+
+                for (int i = (k - 1); i < strarr.Length; i++)
+                {
+                    var consecutiveStrings = new StringBuilder();
+
+                    for (int j = 0; j < k; j++)
+                    {
+                        consecutiveStrings.Append(strarr[i - k + 1 + j]);
+                    }
+
+                    if (consecutiveStrings.Length > longestConsecutiveStrings.Length)
+                    {
+                        longestConsecutiveStrings = consecutiveStrings.ToString();
+                    }
+                }
+
+                return longestConsecutiveStrings;
+            }
+        }
+
+        public static int[] MoveZeroes(int[] arr)
+        {
+            var listWithout0 = arr
+                .Where(n => n != 0)
+                .ToList();
+
+            for (int i = 0; i < arr.Count(n => n == 0); i++)
+            {
+                listWithout0.Add(0);
+            }
+
+            return listWithout0.ToArray();
+            // return arr.OrderBy(x => x == 0).ToArray();
+        }
+
+        public static string FirstNonRepeatingLetter(string s)
+        {
+            // var stringWithoutUnderscore = Regex.Replace(s, "_", string.Empty);
+
+            var firstNonRepeatingLetterInLowercase = string.Empty;
+
+            var firstNonRepeatingLetterInLowercaseGroup = s
+                .ToLower()
+                .GroupBy(l => l)
+                .Where(l => l.Count() < 2)
+                .FirstOrDefault();
+
+            if (firstNonRepeatingLetterInLowercaseGroup == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                firstNonRepeatingLetterInLowercase = firstNonRepeatingLetterInLowercaseGroup.Key.ToString();
+            }
+
+            if (s.Contains(firstNonRepeatingLetterInLowercase))
+            {
+                return firstNonRepeatingLetterInLowercase;
+            }
+            else
+            {
+                return firstNonRepeatingLetterInLowercase.ToUpper();
+            }
+
+            //return s.GroupBy(char.ToLower)
+            //    .Where(gr => gr.Count() == 1)
+            //    .Select(x => x.First().ToString())
+            //    .DefaultIfEmpty("")
+            //    .First();
         }
     }
 }
